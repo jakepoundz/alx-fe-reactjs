@@ -3,14 +3,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeDetails from './components/RecipeDetails';
-import SearchBar from './components/SearchBar'; // Import SearchBar
+import SearchBar from './components/SearchBar';
+import FavoritesList from './components/FavoritesList'; // Import FavoritesList
+import RecommendationsList from './components/RecommendationsList'; // Import RecommendationsList
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <h1>Recipe Sharing App</h1>
-        <SearchBar /> 
+        <SearchBar />
         <AddRecipeForm />
+        <FavoritesList /> 
+        <RecommendationsList /> 
         <Routes>
           <Route path="/" element={<RecipeList />} />
           <Route path="/recipes/:recipeId" element={<RecipeDetails />} />
