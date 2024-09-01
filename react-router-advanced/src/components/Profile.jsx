@@ -10,7 +10,7 @@ const Profile = () => {
           <li><Link to="settings">Settings</Link></li>
         </ul>
       </nav>
-      <Outlet />
+      <Outlet /> {/* This is where the nested routes are rendered */}
     </div>
   );
 };
