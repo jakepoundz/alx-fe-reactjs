@@ -40,7 +40,8 @@ const App = () => {
               <Route path="settings" element={<ProfileSettings />} /> 
             </Route>
           </Route>
-          <Route path="/blog/:postId" element={<BlogPost />} /> 
+          {/* The blog route */}
+          <Route path="/blog/:id" element={<BlogPost />} /> 
         </Routes>
       </div>
     </BrowserRouter>
