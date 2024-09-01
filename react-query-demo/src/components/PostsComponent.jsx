@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 const PostsComponent = () => {
-  const { isLoading, error, data, refetch } = useQuery('posts', () => 
+  const [isError, setIsError] = useState(false); // State for error handling
+  const { isLoading, data, error } = useQuery('posts', () =>
     fetch('https://jsonplaceholder.typicode.com/posts')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .catch((err) => {
+        setIsError(true); 
+        throw err; 
+      })
   );
+  // Function to re-fetch data
+  const fetchPosts = () => {
+    refetch(); // Use the refetch function provided by useQuery
+  };
   if (isLoading) {
     return <div>Loading posts...</div>;
   }
+  if (isError) {
+    return <div>Error fetching posts. Please try again later.</div>;
+  }
   if (error) {
-    return <div>Error fetching posts: {error.message}</div>;
+    return <div>An error occurred: {error.message}</div>;
   }
   return (
     <div>
@@ -22,7 +39,7 @@ const PostsComponent = () => {
           </li>
         ))}
       </ul>
-      <button onClick={refetch}>Refresh Posts</button> 
+      <button onClick={fetchPosts}>Refresh Posts</button>
     </div>
   );
 };
