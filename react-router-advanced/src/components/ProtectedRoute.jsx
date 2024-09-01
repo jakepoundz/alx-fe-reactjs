@@ -8,3 +8,4 @@ const ProtectedRoute = ({ isAuthenticated }) => {
   return <Outlet />;
 };
 export default ProtectedRoute;
+
