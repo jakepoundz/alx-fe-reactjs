@@ -3,7 +3,7 @@ function UserProfile() {
   return (
     <div
       className="user-profile bg-gray-100 rounded-lg shadow-lg mx-auto my-20 
-              p-4 sm:p-8 md:p-8 
+              p-4 sm:p-4 md:p-8 
               max-w-xs sm:max-w-sm md:max-w-sm"
     >
       <img
