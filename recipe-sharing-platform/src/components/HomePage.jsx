@@ -9,7 +9,7 @@ const HomePage = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Recipe Spotlight</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {recipes.map(recipe => (
           <div key={recipe.id} className="bg-white rounded-md shadow-md p-4 hover:shadow-lg transition duration-300">
             <img src={recipe.image} alt={recipe.title} className="w-full rounded-md mb-2" />
