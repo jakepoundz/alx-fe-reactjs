@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import AddRecipeForm from './components/AddRecipeForm';
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
@@ -18,6 +19,7 @@ const HomePage = () => {
             <h2 className="text-xl font-semibold mb-1">{recipe.title}</h2>
             <p className="text-gray-600">{recipe.summary}</p>
             <Link to={`/recipe/${recipe.id}`} className="text-blue-500 hover:underline">View Recipe</Link>
+            <AddRecipeForm />
           </div>
         ))}
       </div>
