@@ -74,12 +74,12 @@ const AddRecipeForm = () => {
           </label>
           <textarea
             id="instructions"
-            name="instructions"
+            name="steps"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"
             value={recipeData.instructions}
             onChange={handleChange}
           />
-          {errors.instructions && (
+          {errors.steps && (
             <p className="text-red-500 text-xs italic">{errors.instructions}</p>
           )}
         </div>
