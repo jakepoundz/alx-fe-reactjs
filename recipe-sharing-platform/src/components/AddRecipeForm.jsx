@@ -3,7 +3,7 @@ const AddRecipeForm = () => {
   const [recipeData, setRecipeData] = useState({
     title: '',
     ingredients: '',
-    instructions: '',
+    steps: '',
   });
   const [errors, setErrors] = useState({});
   const handleChange = (e) => {
@@ -31,7 +31,7 @@ const AddRecipeForm = () => {
       newErrors.ingredients = 'Ingredients are required';
     }
     if (!data.instructions.trim()) {
-      newErrors.instructions = 'Instructions are required';
+      newErrors.steps = 'Steps are required';
     }
     return newErrors;
   };
@@ -43,15 +43,15 @@ const AddRecipeForm = () => {
           <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
             Title:
           </label>
-          <input
+          <textarea
             type="text"
-            id="title"
-            name="title"
+            id="instructions"
+            name="steps"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={recipeData.title}
+            value={recipeData.steps}
             onChange={handleChange}
           />
-          {errors.title && <p className="text-red-500 text-xs italic">{errors.title}</p>}
+          {errors.steps && <p className="text-red-500 text-xs italic">{errors.steps}</p>}
         </div>
         <div className="mb-4">
           <label htmlFor="ingredients" className="block text-gray-700 font-bold mb-2">
@@ -59,7 +59,7 @@ const AddRecipeForm = () => {
           </label>
           <textarea
             id="ingredients"
-            name="ingredients"
+            name="steps"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"
             value={recipeData.ingredients}
             onChange={handleChange}
