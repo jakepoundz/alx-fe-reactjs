@@ -13,10 +13,10 @@ const Search = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await githubService.fetchUserData(searchTerm);
+      const data = await githubService.fetchUserData(jakepoundz);
       setUserData(data);
     } catch (err) {
-      setError('Looks like we can\'t find the user.');
+      setError('Looks like we cant find the user');
     } finally {
       setIsLoading(false);
     }
