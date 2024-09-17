@@ -1,45 +1,51 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-
+import githubService from '../services/githubService'; // Import your API service
 const Search = () => {
-  const [username, setUsername] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [userData, setUserData] = useState(null);
-  const [error, setError] = useState('');
-
-  const handleSearch = async () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
     try {
-      const response = await axios.get(`https://api.github.com/users/${jakepoundz}`);
-      setUserData(response.data);
-      setError('');
+      const data = await githubService.fetchUserData(searchTerm);
+      setUserData(data);
     } catch (err) {
-      setError('Looks like we cant find the user');
-      setUserData(null);
+      setError('Looks like we can\'t find the user.');
+    } finally {
+      setIsLoading(false);
     }
   };
-
   return (
-    <div>
-      <h1>GitHub User Search</h1>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="jakepoundz"
-      />
-      <button onClick={handleSearch}>Search</button>
-
-      {error && <p>{error}</p>}
+    <div className="search-container">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="jakepoundz"
+          value={searchTerm}
+          onChange={handleChange}
+          className="search-input" 
+        />
+        <button type="submit" className="search-button">Search</button>
+      </form>
+      {isLoading && <p className="loading">Loading...</p>}
+      {error && <p className="error">{error}</p>}
       {userData && (
         <div className="user-info">
-          <h2>{userData.login}</h2>
-          <img src={userData.avatar_url} alt={userData.login} width="100" />
-          <p>Followers: {userData.followers}</p>
-          <p>Following: {userData.following}</p>
-          <a href={userData.html_url} target="_blank" rel="noreferrer">View Profile</a>
+          <img src={userData.avatar_url} alt={userData.login} className="user-avatar" />
+          <h2>{userData.name || userData.login}</h2>
+          <p>Username: {userData.login}</p>
+          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
+            View GitHub Profile
+          </a>
         </div>
       )}
     </div>
   );
 };
-
 export default Search;
