@@ -8,11 +8,11 @@ const Search = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`https://api.github.com/users/${username}`);
+      const response = await axios.get(`https://api.github.com/users/${jakepoundz}`);
       setUserData(response.data);
       setError('');
     } catch (err) {
-      setError('User not found');
+      setError('Looks like we cant find the user');
       setUserData(null);
     }
   };
@@ -30,7 +30,7 @@ const Search = () => {
 
       {error && <p>{error}</p>}
       {userData && (
-        <div>
+        <div className="user-info">
           <h2>{userData.login}</h2>
           <img src={userData.avatar_url} alt={userData.login} width="100" />
           <p>Followers: {userData.followers}</p>
