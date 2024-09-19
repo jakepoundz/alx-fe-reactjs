@@ -1,22 +1,16 @@
 import axios from 'axios';
-const baseUrl = process.env.REACT_APP_BASE_URL || 'https://api.github.com';
-const githubService = {
-  async fetchUserData(username, location, minRepos) {
-    try {
-      let queryParams = `?q=${username}`;
-      if (location) {
-        queryParams += `+location:${location}`;
-      }
-      if (minRepos) {
-        queryParams += `+repos:>=${minRepos}`;
-      }
-      const response = await axios.get(`${baseUrl}/search/users${queryParams}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      throw error; 
-    }
-  },
+
+export const fetchAdvancedUserData = async (username, location, minRepos, page = 1) => {
+  let query = `${username ? `user:${username}` : ''}`;
+  if (location) query += `+location:${location}`;
+  if (minRepos) query += `+repos:>=${minRepos}`;
+
+  try {
+    const response = await axios.get(`https://api.github.com/search/users?q=${query}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error fetching data');
+  }
 };
 export default githubService;
 
